@@ -1,0 +1,5 @@
+rootProject.name = "BotApi"
+
+include ":server"
+include ":api"
+include ":example"

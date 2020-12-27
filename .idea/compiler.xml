@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel target="11">
+      <module name="api" target="11" />
+      <module name="api.main" target="11" />
+      <module name="api.test" target="11" />
+      <module name="BotServer.api" target="11" />
+      <module name="BotServer.api.main" target="11" />
+      <module name="BotServer.api.test" target="11" />
+      <module name="BotServer.example" target="11" />
+      <module name="BotServer.example.main" target="11" />
+      <module name="BotServer.example.test" target="11" />
+      <module name="BotServer.main" target="11" />
+      <module name="BotServer.server" target="11" />
+      <module name="BotServer.server.main" target="11" />
+      <module name="BotServer.server.test" target="11" />
+      <module name="BotServer.test" target="11" />
+      <module name="example" target="11" />
+      <module name="example.main" target="11" />
+      <module name="example.test" target="11" />
+      <module name="server" target="11" />
+      <module name="server.main" target="11" />
+      <module name="server.test" target="11" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

@@ -1,0 +1,5 @@
+.gradle/
+build/
+
+plugins/example.jar
+config.json
