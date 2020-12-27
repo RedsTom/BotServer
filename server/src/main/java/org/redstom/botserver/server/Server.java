@@ -2,27 +2,20 @@ package org.redstom.botserver.server;
 
 import org.javacord.api.DiscordApi;
 import org.javacord.api.DiscordApiBuilder;
-import org.redstom.botapi.BotPlugin;
 import org.redstom.botapi.events.IEventDispatcher;
 import org.redstom.botapi.events.types.MessageCreateEvent;
 import org.redstom.botapi.events.types.ServerStartedEvent;
 import org.redstom.botapi.events.types.ServerStartingEvent;
 import org.redstom.botapi.server.IServer;
 import org.redstom.botapi.utils.IConsoleManager;
-import org.redstom.botserver.Constants;
 import org.redstom.botserver.config.ConfigFile;
-import org.redstom.botserver.config.PluginFolder;
-import org.redstom.botserver.config.PluginManifest;
 import org.redstom.botserver.config.parsed.Config;
 import org.redstom.botserver.console.CliManager;
 import org.redstom.botserver.events.EventDispatcher;
-import org.redstom.botserver.exceptions.PluginLoadingException;
-import org.redstom.botserver.java.JarFileLoader;
-import org.redstom.botserver.java.exceptions.MissingAnnotationException;
+import org.redstom.botserver.java.exceptions.PluginAlreadyExistsException;
+import org.redstom.botserver.plugins.PluginLoader;
 
-import java.io.*;
-import java.lang.reflect.InvocationTargetException;
-import java.net.URL;
+import java.io.IOException;
 
 public class Server implements IServer {
 
@@ -31,15 +24,13 @@ public class Server implements IServer {
     private DiscordApi api;
     private EventDispatcher eventDispatcher;
     private Config config;
+    private PluginLoader pluginLoader;
 
-    public Server() {
-
-    }
-
-    public void start() throws IOException, PluginLoadingException, ClassNotFoundException, NoSuchMethodException {
+    public void start() throws IOException, ClassNotFoundException, NoSuchMethodException, PluginAlreadyExistsException {
         this.started = true;
         this.manager = new CliManager();
         this.eventDispatcher = new EventDispatcher();
+        this.pluginLoader = new PluginLoader();
 
         manager.printLine("Server marked as starting");
 
@@ -52,7 +43,7 @@ public class Server implements IServer {
         manager.printBlankLine();
 
         manager.printLine("Loading plugins...");
-        updatePlugins();
+        pluginLoader.load(this);
         eventDispatcher.dispatch(new ServerStartingEvent());
         manager.printLine("Plugins loaded !");
 
@@ -80,51 +71,6 @@ public class Server implements IServer {
         return configFile.parse();
     }
 
-    private void updatePlugins() throws IOException, ClassNotFoundException, NoSuchMethodException {
-
-        PluginFolder pluginFolder = new PluginFolder();
-        if (pluginFolder.checkExist() && pluginFolder.listFiles() != null) {
-
-            for (File file : pluginFolder.listFiles()) {
-                if (file.isFile() && file.getName().endsWith(".jar")) {
-                    System.out.println("-------[ Plugin " + file.getName() + " ]-------");
-                    try {
-                        JarFileLoader cl = new JarFileLoader(new URL[]{file.toURI().toURL()}, getClass().getClassLoader());
-
-                        BufferedReader bReader = new BufferedReader(new InputStreamReader(cl.getResourceAsStream("manifest.json")));
-                        PluginManifest config = Constants.GSON_BUILDER.create().fromJson(bReader, PluginManifest.class);
-
-                        Class<?> mainClass = cl.loadClass(config.getMainClass());
-                        BotPlugin annotation = mainClass.getAnnotation(BotPlugin.class);
-
-                        if (annotation == null) {
-                            throw new MissingAnnotationException("Cannot find the BotPlugin annotation on the main class !");
-                        }
-
-                        System.out.println("Plugin informations : ");
-                        System.out.println("\tId : " + annotation.id());
-                        System.out.println("\tName : " + annotation.name());
-                        System.out.println("\tVersion : " + annotation.version());
-                        System.out.println("\tDescription : " + annotation.description());
-                        System.out.println("\tAuthors : " + annotation.author());
-
-                        mainClass.getMethod("load", IServer.class).invoke(this, this);
-                        mainClass.getMethod("unload", IServer.class);
-
-                    } catch (ClassNotFoundException exception) {
-                        System.err.println("Cannot find the provided main class ! Please fix it and reload the server.");
-                        throw new ClassNotFoundException("Invalid manifest.json : Cannot find the precised main-class !");
-                    } catch (NullPointerException exception) {
-                        throw new FileNotFoundException("Cannot find the manifest.json in the jar file !");
-                    } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-                        throw new NoSuchMethodException("Cannot find the two required methods in the main class : load() and unload()");
-                    }
-                    System.out.println("------------------------------------");
-                }
-            }
-        }
-    }
-
     @Override
     public IConsoleManager getConsoleManager() {
         return this.manager;
@@ -147,5 +93,9 @@ public class Server implements IServer {
 
     public void setConfig(Config config) {
         this.config = config;
+    }
+
+    public PluginLoader getPluginLoader() {
+        return pluginLoader;
     }
 }
