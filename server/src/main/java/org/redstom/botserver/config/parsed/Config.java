@@ -11,8 +11,6 @@ public final class Config {
 
     @Expose
     private String token;
-    @Expose
-    private int shards;
 
     private Config() {
 
@@ -28,14 +26,6 @@ public final class Config {
 
     public void setToken(String token) {
         this.token = token;
-    }
-
-    public int getShards() {
-        return shards;
-    }
-
-    public void setShards(int shards) {
-        this.shards = shards;
     }
 
     public void write(ConfigFile config) throws IOException {
