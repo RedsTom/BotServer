@@ -4,12 +4,38 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5d2b0807-0631-4760-afe2-08d786d30b67" name="Default Changelist" comment="Redid the API structure ; added Injection, new classes, removed Javacord descending classes.&#10;Added possibility to Inject variables (interfaces only)&#10;Redid EventSystem">
-      <change afterPath="$PROJECT_DIR$/example/src/main/java/org/redstom/example/events/Listener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/logs/2021-01-13-52.log.gz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/logs/2021-01-13-53.log.gz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/src/main/java/org/redstom/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/example/src/main/java/org/redstom/example/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/src/main/java/org/redstom/example/events/ServerStartedListener.java" beforeDir="false" />
+    <list default="true" id="5d2b0807-0631-4760-afe2-08d786d30b67" name="Default Changelist" comment="Added some stuff to gradle, don't worry it's legit">
+      <change afterPath="$PROJECT_DIR$/.idea/modules/BotServer.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/src/main/java/org/redstom/botapi/configuration/FileConfiguration.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/src/main/java/org/redstom/example/commands/Commands.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/org/redstom/botserver/config/FileConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.7/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.7/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.7/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.7/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.7/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.7/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7/javaCompile/classAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.7/javaCompile/jarAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7/javaCompile/jarAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.7/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7/javaCompile/javaCompile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.7/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7/javaCompile/taskHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/md5-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/api/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/example/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/src/main/java/org/redstom/example/events/Listener.java" beforeDir="false" afterPath="$PROJECT_DIR$/example/src/main/java/org/redstom/example/events/Listener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/server/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/org/redstom/botserver/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/org/redstom/botserver/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/org/redstom/botserver/config/parsed/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/org/redstom/botserver/config/parsed/Config.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/org/redstom/botserver/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/org/redstom/botserver/server/Server.java" afterDir="false" />
     </list>
     <list id="a1243fd4-6c31-4ff1-a7c2-817023280b47" name="Redid the API structure ; added Injection, new classes, removed Javacord descending classes. Added possibility to Inject variables (interfaces only) Redid EventSystem" comment="Redid the API structure ; added Injection, new classes, removed Javacord descending classes. Added possibility to Inject variables (interfaces only) Redid EventSystem">
       <change afterPath="$PROJECT_DIR$/api/src/main/java/org/redstom/botapi/events/IEventManager.java" afterDir="false" />
@@ -37,7 +63,7 @@
       <change beforePath="$PROJECT_DIR$/api/src/main/java/org/redstom/botapi/server/IServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/main/java/org/redstom/botapi/server/IServer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/src/main/java/org/redstom/botapi/utils/IConsoleManager.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/main/java/org/redstom/botserver/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/org/redstom/botserver/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/org/redstom/botserver/config/PluginManifest.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/org/redstom/botserver/plugins/config/PluginManifest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/org/redstom/botserver/config/PluginManifest.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/main/java/org/redstom/botserver/console/CliManager.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/main/java/org/redstom/botserver/events/EventDispatcher.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/main/java/org/redstom/botserver/exceptions/PluginLoadingException.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/org/redstom/botserver/plugins/loader/exceptions/PluginLoadingException.java" afterDir="false" />
@@ -64,6 +90,9 @@
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
     </projectState>
+    <projectState path="$PROJECT_DIR$/graven-support">
+      <ProjectState />
+    </projectState>
   </component>
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
@@ -80,9 +109,53 @@
         <task path="$PROJECT_DIR$/example">
           <activation />
         </task>
+        <task path="$PROJECT_DIR$/graven-support">
+          <activation />
+        </task>
         <projects_view>
           <tree_state>
-            <expand />
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="BotApi" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="BotApi" type="f1a62948:ProjectNode" />
+                <item name="graven-support" type="2d1252cf:ModuleNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="BotApi" type="f1a62948:ProjectNode" />
+                <item name="graven-support" type="2d1252cf:ModuleNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="BotApi" type="f1a62948:ProjectNode" />
+                <item name="graven-support" type="2d1252cf:ModuleNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="build" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="BotApi" type="f1a62948:ProjectNode" />
+                <item name="server" type="2d1252cf:ModuleNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="BotApi" type="f1a62948:ProjectNode" />
+                <item name="server" type="2d1252cf:ModuleNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="BotApi" type="f1a62948:ProjectNode" />
+                <item name="server" type="2d1252cf:ModuleNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="shadow" type="c8890929:TasksNode$1" />
+              </path>
+            </expand>
             <select />
           </tree_state>
         </projects_view>
@@ -92,8 +165,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="AnnotationType" />
+        <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -117,6 +191,34 @@
   <component name="GitToolBoxStore">
     <option name="projectConfigVersion" value="2" />
   </component>
+  <component name="LineStatusTrackerManager">
+    <file path="$PROJECT_DIR$/server/src/main/java/org/redstom/botserver/server/Server.java">
+      <ranges>
+        <range start1="2" end1="2" start2="2" end2="6" changelist="a1243fd4-6c31-4ff1-a7c2-817023280b47" />
+        <range start1="4" end1="8" start2="8" end2="10" changelist="a1243fd4-6c31-4ff1-a7c2-817023280b47" />
+        <range start1="9" end1="10" start2="11" end2="11" changelist="a1243fd4-6c31-4ff1-a7c2-817023280b47" />
+        <range start1="12" end1="16" start2="13" end2="18" changelist="a1243fd4-6c31-4ff1-a7c2-817023280b47" />
+        <range start1="18" end1="18" start2="20" end2="24" changelist="a1243fd4-6c31-4ff1-a7c2-817023280b47" />
+        <range start1="21" end1="23" start2="27" end2="30" changelist="a1243fd4-6c31-4ff1-a7c2-817023280b47" />
+        <range start1="24" end1="25" start2="31" end2="32" changelist="a1243fd4-6c31-4ff1-a7c2-817023280b47" />
+        <range start1="27" end1="27" start2="34" end2="46" changelist="a1243fd4-6c31-4ff1-a7c2-817023280b47" />
+        <range start1="28" end1="60" start2="47" end2="182" changelist="a1243fd4-6c31-4ff1-a7c2-817023280b47" />
+        <range start1="62" end1="71" start2="184" end2="229" changelist="a1243fd4-6c31-4ff1-a7c2-817023280b47" />
+        <range start1="74" end1="81" start2="232" end2="234" changelist="5d2b0807-0631-4760-afe2-08d786d30b67" />
+        <range start1="88" end1="88" start2="241" end2="246" changelist="a1243fd4-6c31-4ff1-a7c2-817023280b47" />
+        <range start1="93" end1="93" start2="251" end2="261" changelist="a1243fd4-6c31-4ff1-a7c2-817023280b47" />
+        <range start1="100" end1="100" start2="268" end2="272" changelist="a1243fd4-6c31-4ff1-a7c2-817023280b47" />
+      </ranges>
+    </file>
+    <file path="$PROJECT_DIR$/server/src/main/java/org/redstom/botserver/Main.java">
+      <ranges>
+        <range start1="2" end1="3" start2="2" end2="2" changelist="a1243fd4-6c31-4ff1-a7c2-817023280b47" />
+        <range start1="5" end1="7" start2="4" end2="4" changelist="a1243fd4-6c31-4ff1-a7c2-817023280b47" />
+        <range start1="9" end1="10" start2="6" end2="7" changelist="5d2b0807-0631-4760-afe2-08d786d30b67" />
+        <range start1="11" end1="13" start2="8" end2="15" changelist="5d2b0807-0631-4760-afe2-08d786d30b67" />
+      </ranges>
+    </file>
+  </component>
   <component name="ProjectCodeStyleSettingsMigration">
     <option name="version" value="1" />
   </component>
@@ -139,29 +241,35 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/server/src/main/java/org/redstom/botserver/plugins/loader" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/server/src/main/java/org/redstom/botserver/events/types" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.39655173" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="preferences.editor.code.editing" />
     <property name="show.migrate.to.gradle.popup" value="false" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
-      <recent name="org.redstom.botserver.server" />
-      <recent name="org.redstom.botserver.console.logging" />
-      <recent name="org.redstom.botserver.console" />
+      <recent name="org.redstom.gravensupport.commands" />
+      <recent name="org.redstom.gravensupport.listener" />
+      <recent name="org.redstom.example.commands" />
+      <recent name="org.redstom.example.listener" />
+      <recent name="org.redstom.botapi.commands" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/server/src/main/java/org/redstom/botserver/events/types" />
       <recent name="$PROJECT_DIR$/api" />
       <recent name="$PROJECT_DIR$/example" />
     </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="org.redstom.gravensupport.commands" />
+    </key>
   </component>
-  <component name="RunManager" selected="Gradle.BotServer:server [run]">
+  <component name="RunManager" selected="Gradle.BotServer:graven-support [build]">
     <configuration default="true" type="DjangoTestsConfigurationType">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -265,31 +373,24 @@
       <option name="USE_PATTERN" value="false" />
       <method v="2" />
     </configuration>
-    <configuration name="BotServer:api [buildEnvironment]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/api" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="buildEnvironment" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
+    <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.redstom.botserver.Main" />
+      <module name="BotApi.server.main" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/server" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.redstom.botserver.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
-    <configuration name="BotServer:server [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="BotServer:graven-support [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/server" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/graven-support" />
         <option name="externalSystemIdString" value="GRADLE" />
         <option name="scriptParameters" />
         <option name="taskDescriptions">
@@ -307,7 +408,32 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="BotServer:server [run]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="BotServer:server [run]" type="GradleRunConfiguration" factoryName="Gradle">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/server" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="run" />
+          </list>
+        </option>
+        <option name="vmOptions" value="" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2">
+        <option name="Gradle.BeforeRunTask" enabled="true" tasks="build" externalProjectPath="$PROJECT_DIR$/api" vmOptions="" scriptParameters="" />
+        <option name="Gradle.BeforeRunTask" enabled="true" tasks="build" externalProjectPath="$PROJECT_DIR$/graven-support" vmOptions="" scriptParameters="" />
+        <option name="Gradle.BeforeRunTask" enabled="true" tasks="build" externalProjectPath="$PROJECT_DIR$/example" vmOptions="" scriptParameters="" />
+      </method>
+    </configuration>
+    <configuration name="BotServer:server [shadowJar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$/server" />
@@ -318,7 +444,7 @@
         </option>
         <option name="taskNames">
           <list>
-            <option value="run" />
+            <option value="shadowJar" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -376,15 +502,15 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Gradle.BotServer:api [buildEnvironment]" />
-      <item itemvalue="Gradle.BotServer:server [build]" />
+      <item itemvalue="Application.Main" />
       <item itemvalue="Gradle.BotServer:server [run]" />
+      <item itemvalue="Gradle.BotServer:server [shadowJar]" />
+      <item itemvalue="Gradle.BotServer:graven-support [build]" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.BotServer:server [run]" />
-        <item itemvalue="Gradle.BotServer:server [build]" />
-        <item itemvalue="Gradle.BotServer:api [buildEnvironment]" />
+        <item itemvalue="Gradle.BotServer:graven-support [build]" />
+        <item itemvalue="Gradle.BotServer:server [shadowJar]" />
       </list>
     </recent_temporary>
   </component>
@@ -420,6 +546,20 @@
       <workItem from="1610559314119" duration="5517000" />
       <workItem from="1610566970910" duration="1416000" />
       <workItem from="1610568416335" duration="2054000" />
+      <workItem from="1610570475588" duration="1471000" />
+      <workItem from="1610622327070" duration="6509000" />
+      <workItem from="1610645513975" duration="2039000" />
+      <workItem from="1612289895793" duration="1451000" />
+      <workItem from="1612292066010" duration="5381000" />
+      <workItem from="1612355446257" duration="9003000" />
+      <workItem from="1612365579975" duration="2906000" />
+      <workItem from="1612560474304" duration="11000" />
+      <workItem from="1612812308931" duration="4640000" />
+      <workItem from="1612884755124" duration="8967000" />
+      <workItem from="1612980154813" duration="9243000" />
+      <workItem from="1613065114351" duration="484000" />
+      <workItem from="1613065659372" duration="5828000" />
+      <workItem from="1613211286972" duration="2155000" />
     </task>
     <task id="LOCAL-00001" summary="Updated Gradle structure&#10;Added some libraries">
       <created>1610570199434</created>
@@ -442,7 +582,21 @@
       <option name="project" value="LOCAL" />
       <updated>1610570397070</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Added stuff">
+      <created>1610570491333</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1610570491333</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Added some stuff to gradle, don't worry it's legit">
+      <created>1610570517056</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1610570517056</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -495,7 +649,9 @@
     <MESSAGE value="Updated Gradle structure&#10;Added some libraries" />
     <MESSAGE value="Removed shard count from the Config.java" />
     <MESSAGE value="Redid the API structure ; added Injection, new classes, removed Javacord descending classes.&#10;Added possibility to Inject variables (interfaces only)&#10;Redid EventSystem" />
-    <option name="LAST_COMMIT_MESSAGE" value="Redid the API structure ; added Injection, new classes, removed Javacord descending classes.&#10;Added possibility to Inject variables (interfaces only)&#10;Redid EventSystem" />
+    <MESSAGE value="Added stuff" />
+    <MESSAGE value="Added some stuff to gradle, don't worry it's legit" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added some stuff to gradle, don't worry it's legit" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -512,7 +668,7 @@
       <configuration name="GradleRunConfiguration">
         <watch expression="availableParams" />
       </configuration>
-      <inline-watch fileUrl="file://$PROJECT_DIR$/server/src/main/java/org/redstom/botserver/plugins/loader/wirer/ParametersWirer.java" line="35">
+      <inline-watch fileUrl="file://$PROJECT_DIR$/server/src/main/java/org/redstom/botserver/plugins/loader/wirer/ParametersWirer.java" line="43">
         <watch expression="valuables" language="JAVA" />
       </inline-watch>
     </watches-manager>
