@@ -1,10 +1,15 @@
 plugins {
     id 'java'
     id 'application'
+    id "com.github.johnrengelman.shadow" version "6.1.0"
+}
+
+shadowJar {
+    project.configurations.implementation.canBeResolved(true)
+    configurations = [project.configurations.implementation]
 }
 
 run {
-    dependsOn(":example:build")
     mainClassName = "org.redstom.botserver.Main"
     standardInput = System.in
 }
@@ -14,10 +19,13 @@ repositories {
     maven {
         url "https://libraries.minecraft.net"
     }
+    // Snapshot Javacord repo
+    maven {
+        url "https://oss.sonatype.org/content/repositories/snapshots/"
+    }
 }
 
 dependencies {
-    implementation 'org.javacord:javacord:3.1.2'
     implementation 'com.mojang:brigadier:1.0.17'
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation 'org.jline:jline-console:3.18.0'
@@ -25,4 +33,11 @@ dependencies {
     implementation 'org.reflections:reflections:0.9.12'
     implementation 'org.apache.commons:commons-lang3:3.11'
     implementation project(":api")
+}
+
+jar {
+    manifest {
+        attributes("Main-Class": "org.redstom.botserver.Main",
+                "Multi-Release": "true")
+    }
 }

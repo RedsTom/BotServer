@@ -7,10 +7,15 @@ import java.io.IOException;
 
 public class Main {
 
-    public static void main(String[] args) throws ClassNotFoundException, NoSuchMethodException, IOException, PluginAlreadyExistsException {
+    public static void main(String[] args) {
 
-        Server server = new Server();
-        server.start();
+
+        Thread mainThread = new Thread(() -> {
+            Server server = new Server();
+            server.start();
+        });
+        mainThread.setName("BotServer - Main");
+        mainThread.start();
 
     }
 

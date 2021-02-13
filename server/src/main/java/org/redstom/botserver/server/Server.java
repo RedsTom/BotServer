@@ -72,13 +72,8 @@ public class Server implements IServer {
     }
 
     @Override
-    public IConsoleManager getConsoleManager() {
-        return this.manager;
-    }
-
-    @Override
-    public IEventDispatcher getEventDispatcher() {
-        return this.eventDispatcher;
+    public IEventManager getEventManager() {
+        return this.eventManager;
     }
 
     @Override

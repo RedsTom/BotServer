@@ -4,6 +4,10 @@ plugins {
 
 repositories {
     mavenCentral()
+    // Snapshot Javacord repo
+    maven {
+        url "https://oss.sonatype.org/content/repositories/snapshots/"
+    }
 }
 
 dependencies {
