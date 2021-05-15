@@ -15,4 +15,4 @@ dependencies {
     implementation 'org.jetbrains:annotations:20.1.0'
 }
 
-setLibsDirName("/media/redstom/DevData/Java/BotServer/server/plugins")
+setLibsDirName("../../server/plugins")

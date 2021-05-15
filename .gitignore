@@ -1,3 +1,6 @@
 graven-support/
 .gradle
 .idea
+
+*/.gradle
+*/.idea
