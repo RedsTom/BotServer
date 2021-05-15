@@ -1,4 +1,4 @@
-package org.redstom.botserver.java.exceptions;
+package org.redstom.botserver.plugins.loader.exceptions;
 
 public class PluginAlreadyExistsException extends Exception {
 

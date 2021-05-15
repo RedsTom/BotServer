@@ -1,10 +1,9 @@
 package org.redstom.botapi.events.types;
 
-import org.redstom.botapi.events.IEvent;
+import org.javacord.api.event.Event;
 
-public class ServerStoppingEvent implements IEvent {
-    @Override
-    public Class<? extends IEvent> getEventType() {
-        return this.getClass();
-    }
+/**
+ * Event called before the server shuts down
+ */
+public interface ServerStoppingEvent extends Event {
 }

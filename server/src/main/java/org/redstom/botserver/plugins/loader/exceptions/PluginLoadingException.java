@@ -1,4 +1,4 @@
-package org.redstom.botserver.exceptions;
+package org.redstom.botserver.plugins.loader.exceptions;
 
 public class PluginLoadingException extends Exception {
     public PluginLoadingException(String s) {
