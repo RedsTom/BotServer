@@ -7,15 +7,10 @@ import org.redstom.botapi.server.IServer;
 @BotPlugin(author = "RedsTom", id = "Example", name = "ExampleAddon")
 public class Main {
 
-    @Inject({IServer.class})
-    public void load(IServer server) {
+    public void load(@Inject("server") IServer server) {
         server.getLogger().info("Plugin Example chargé !");
-
-        //server.getEventManager().register(new Listener());
     }
 
-    public static void unload() {
-
+    public void unload() {
     }
-
 }

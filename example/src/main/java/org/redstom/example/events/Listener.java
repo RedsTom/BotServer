@@ -13,16 +13,13 @@ import org.redstom.botapi.server.IServer;
 public class Listener {
 
     @EventReceiver(ServerStartedEvent.class)
-    @Inject({IServer.class})
-    public void onServerStarted(ServerStartedEvent event, IServer server) {
-        System.out.println(server.getApi().getYourself().getName());
+    public void onServerStarted(ServerStartedEvent event, @Inject("server") IServer server) {
+        server.getLogger().info("The served has started ! (from Example plugin)");
     }
 
     @EventReceiver(MessageCreateEvent.class)
-    public void onMessageSent(MessageCreateEvent event) {
-        if (event.getMessageAuthor().isBotUser()) return;
-
-        event.getChannel().sendMessage("Ok, received !");
+    public void onMessageCreate(MessageCreateEvent event) {
+        event.getChannel().sendMessage("Message received !");
     }
 
 }
