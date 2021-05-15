@@ -1,10 +1,9 @@
 package org.redstom.botapi.events.types;
 
-import org.redstom.botapi.events.IEvent;
+import org.javacord.api.event.Event;
 
-public class ServerStartingEvent implements IEvent {
-    @Override
-    public Class<? extends IEvent> getEventType() {
-        return this.getClass();
-    }
+/**
+ * Event called when all the plugins were loaded
+ */
+public interface ServerStartingEvent extends Event {
 }

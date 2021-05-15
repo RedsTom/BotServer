@@ -1,17 +1,23 @@
 package org.redstom.botserver.plugins;
 
-import org.redstom.botapi.utils.IConsoleManager;
+import org.redstom.botapi.BotPlugin;
+import org.reflections.Reflections;
 
 public class Plugin {
 
     private final String id, name, author, version, description;
+    private final Reflections pluginReflections;
+    private final Object instance;
 
-    public Plugin(String id, String name, String author, String version, String description) {
-        this.id = id;
-        this.name = name;
-        this.author = author;
-        this.version = version;
-        this.description = description;
+    public Plugin(Class<?> mainClass, Reflections pluginReflections) throws IllegalAccessException, InstantiationException {
+        BotPlugin plugin = mainClass.getAnnotation(BotPlugin.class);
+        this.id = plugin.id();
+        this.name = plugin.name();
+        this.author = plugin.author();
+        this.version = plugin.version();
+        this.description = plugin.description();
+        this.instance = mainClass.newInstance();
+        this.pluginReflections = pluginReflections;
     }
 
     public String getId() {
@@ -34,8 +40,16 @@ public class Plugin {
         return description;
     }
 
-    public void printInformation(IConsoleManager consoleManager) {
-        consoleManager.printLine(
+    public Object getInstance() {
+        return instance;
+    }
+
+    public Reflections getPluginReflections() {
+        return pluginReflections;
+    }
+
+    public void printInformation() {
+        System.out.println(
                 "Plugin information : \n" +
                         "\tId : " + getId() + "\n" +
                         "\tName : " + getName() + "\n" +

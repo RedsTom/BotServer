@@ -1,10 +1,9 @@
 package org.redstom.botapi.events.types;
 
-import org.redstom.botapi.events.IEvent;
+import org.javacord.api.event.Event;
 
-public class ServerStartedEvent implements IEvent {
-    @Override
-    public Class<? extends IEvent> getEventType() {
-        return this.getClass();
-    }
+/**
+ * Event called when the server has finished loading and the bot has started
+ */
+public interface ServerStartedEvent extends Event {
 }

@@ -1,4 +1,4 @@
-package org.redstom.botserver.java;
+package org.redstom.botserver.plugins.loader.java;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -17,14 +17,6 @@ public class JarFileLoader extends URLClassLoader {
 
     public JarFileLoader(URL[] urls, ClassLoader parent, URLStreamHandlerFactory factory) {
         super(urls, parent, factory);
-    }
-
-    public JarFileLoader(String name, URL[] urls, ClassLoader parent) {
-        super(name, urls, parent);
-    }
-
-    public JarFileLoader(String name, URL[] urls, ClassLoader parent, URLStreamHandlerFactory factory) {
-        super(name, urls, parent, factory);
     }
 
     public void addFile(String path) throws MalformedURLException {
