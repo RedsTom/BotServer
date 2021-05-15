@@ -12,6 +12,9 @@ public final class Config {
     @Expose
     private String token;
 
+    @Expose
+    private String prefix;
+
     private Config() {
 
     }
@@ -28,11 +31,18 @@ public final class Config {
         this.token = token;
     }
 
+    public String getPrefix() {
+        return prefix;
+    }
+
+    public void setPrefix(String prefix) {
+        this.prefix = prefix;
+    }
+
     public void write(ConfigFile config) throws IOException {
         FileWriter writer = new FileWriter(config);
         writer.write(Constants.GSON_BUILDER.create().toJson(this));
         writer.flush();
         writer.close();
     }
-
 }
