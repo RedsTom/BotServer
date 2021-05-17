@@ -10,7 +10,7 @@ shadowJar {
 }
 
 run {
-    mainClassName = "org.redstom.botserver.Main"
+    mainClassName = "eu.redstom.botserver.Main"
     standardInput = System.in
 }
 
@@ -37,7 +37,7 @@ dependencies {
 
 jar {
     manifest {
-        attributes("Main-Class": "org.redstom.botserver.Main",
+        attributes("Main-Class": "eu.redstom.botserver.Main",
                 "Multi-Release": "true")
     }
 }

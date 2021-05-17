@@ -2,6 +2,6 @@
 build/
 
 plugins/example.jar
-plugins/
+plugins/*.jar
 logs/
 config.json

@@ -4,3 +4,6 @@ graven-support/
 
 */.gradle
 */.idea
+
+gradle.properties
+*/gradle.properties
