@@ -1,7 +1,6 @@
 package eu.redstom.botserver.config;
 
 import java.io.File;
-import java.io.IOException;
 
 public class PluginFolder extends File {
 
@@ -9,7 +8,7 @@ public class PluginFolder extends File {
         super("plugins/");
     }
 
-    public boolean checkExist() throws IOException {
+    public boolean checkExist() {
         if (!exists()) {
             mkdir();
             return false;

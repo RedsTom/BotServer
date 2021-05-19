@@ -26,7 +26,10 @@ public class CommandThread extends Thread {
         while (!server.isServerStarted()) ;
         System.out.println("Enter \"?\" or \"help\" to get all the console commands");
         while (!isInterrupted() && console.hasNextLine()) {
-            System.out.println(console.nextLine());
+            String s = console.nextLine();
+            if (s.equalsIgnoreCase("stop")) {
+                server.stop();
+            }
         }
         server.stop();
     }

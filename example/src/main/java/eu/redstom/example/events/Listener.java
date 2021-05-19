@@ -19,6 +19,7 @@ public class Listener {
 
     @EventReceiver(MessageCreateEvent.class)
     public void onMessageCreate(MessageCreateEvent event) {
+        if (event.getMessageAuthor().isBotUser()) return;
         event.getChannel().sendMessage("Message received !");
     }
 

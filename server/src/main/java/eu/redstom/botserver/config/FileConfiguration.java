@@ -2,19 +2,19 @@ package eu.redstom.botserver.config;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
 import eu.redstom.botserver.plugins.Plugin;
 
 import java.io.*;
+import java.util.Map;
 
 public class FileConfiguration implements eu.redstom.botapi.configuration.FileConfiguration {
 
     private final File folder;
     private File file;
-    private JsonObject object;
+    private Map<?, ?> object;
 
     public FileConfiguration(Plugin plugin, String fileName) throws IOException {
-        this.folder = new File("plugins", plugin.getId());
+        this.folder = new File(new PluginFolder(), plugin.getId());
         if (!folder.exists()) folder.mkdirs();
         this.file = new File(folder, fileName + ".json");
         if (!file.exists()) file.createNewFile();
@@ -24,7 +24,7 @@ public class FileConfiguration implements eu.redstom.botapi.configuration.FileCo
     public void update() throws IOException {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         BufferedReader reader = new BufferedReader(new FileReader(file));
-        this.object = gson.fromJson(reader, JsonObject.class);
+        this.object = gson.fromJson(reader, Map.class);
         reader.close();
     }
 
@@ -37,7 +37,7 @@ public class FileConfiguration implements eu.redstom.botapi.configuration.FileCo
         writer.close();
     }
 
-    public JsonObject getValues() {
+    public Map<?, ?> getValues() {
         return object;
     }
 }

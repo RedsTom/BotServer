@@ -9,6 +9,7 @@ import eu.redstom.botserver.plugins.loader.exceptions.MissingAnnotationException
 import eu.redstom.botserver.plugins.loader.exceptions.PluginAlreadyExistsException;
 import eu.redstom.botserver.plugins.loader.java.JarFileLoader;
 import eu.redstom.botserver.plugins.loader.wirer.ParametersWirer;
+import eu.redstom.botserver.server.Server;
 import org.reflections.Reflections;
 import org.reflections.scanners.ResourcesScanner;
 import org.reflections.scanners.SubTypesScanner;
@@ -18,11 +19,11 @@ import org.reflections.util.ConfigurationBuilder;
 import org.reflections.util.FilterBuilder;
 
 import java.io.File;
-import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -55,22 +56,20 @@ public class PluginLoader {
         this.ids.add(plugin.getId());
     }
 
-    public void load(EventManager manager, Map<String, Object> availableParams) throws IOException {
+    public void load(Server server, EventManager manager, Map<String, Object> availableParams) {
         // Gets the plugin folder
         PluginFolder pluginFolder = new PluginFolder();
         if (pluginFolder.checkExist() && pluginFolder.listFiles() != null) {
             // Loop for all files in the plugin folder
-            for (File file : pluginFolder.listFiles()) {
-                // Checks if the file is a jar file
-                if (file.isFile() && file.getName().endsWith(".jar")) {
-                    // Loads the plugin.
-                    loadPlugin(file, manager, availableParams);
-                }
-            }
+            // Checks if the file is a jar file
+            // Loads the plugin.
+            Arrays.stream(pluginFolder.listFiles())
+                .filter(file -> file.isFile() && file.getName().endsWith(".jar"))
+                .forEach(file -> loadPlugin(server, file, manager, availableParams));
         }
     }
 
-    private void loadPlugin(File file, EventManager eventManager, Map<String, Object> availableParams) {
+    private void loadPlugin(Server server, File file, EventManager eventManager, Map<String, Object> availableParams) {
         try {
             // Gets the classpath of the provided file.
             JarFileLoader cl = new JarFileLoader(new URL[]{file.toURI().toURL()}, getClass().getClassLoader());
@@ -117,26 +116,19 @@ public class PluginLoader {
             System.out.println("-------[ Plugin " + file.getName() + " ]-------");
 
             // Initializes a new plugin with the informations of the @BotPlugin annotation.
-            Plugin plugin = new Plugin(mainClass, reflections);
+            Plugin plugin = new Plugin(server, mainClass, reflections);
             plugin.printInformation();
 
+            ParametersWirer<?> pluginWirer = new ParametersWirer<>(plugin.getInstance().getClass());
+
             // Gets the "load" from the Main class
-            Method loadMethod = null;
-            boolean found = false;
-            for (Method declaredMethod : mainClass.getDeclaredMethods()) {
-                if (declaredMethod.getName().equalsIgnoreCase("load")) {
-                    if (found) {
-                        throw new Exception("There cannot be more than one load method in the main class");
-                    }
-                    loadMethod = declaredMethod;
-                    found = true;
-                }
-            }
+            availableParams.put("plugin", plugin);
+
+            Method loadMethod = pluginWirer.getMethod("load");
 
             if (loadMethod == null) {
                 throw new NoSuchMethodException("Cannot find the load method in the main class");
             }
-            ParametersWirer<?> pluginWirer = new ParametersWirer<>(plugin.getInstance().getClass());
             pluginWirer.invoke(pluginWirer.getMethods("load"), plugin.getInstance(), new Object[0], availableParams);
 
             // Check if the "unload" method exists
@@ -151,7 +143,7 @@ public class PluginLoader {
                         );
                     }
                     ParametersWirer<?> wirer = new ParametersWirer<>(clazz);
-                    eventManager.register(wirer.newInstance(clazz.getConstructors()[0], availableParams));
+                    eventManager.register(wirer.newInstance(clazz.getConstructors()[0], availableParams), plugin);
                 } catch (InstantiationException | IllegalAccessException e) {
                     System.err.println("Cannot auto register the @SelfRegisteringListener " + clazz.getName());
                     e.printStackTrace();

@@ -4,6 +4,7 @@ import eu.redstom.botapi.events.EventBus;
 import eu.redstom.botapi.events.EventPriority;
 import eu.redstom.botapi.events.EventReceiver;
 import eu.redstom.botapi.events.IEventManager;
+import eu.redstom.botapi.plugins.IPlugin;
 import eu.redstom.botserver.events.executor.MethodEventExecutor;
 import eu.redstom.botserver.plugins.loader.exceptions.MissingAnnotationException;
 import eu.redstom.botserver.plugins.loader.wirer.ParametersWirer;
@@ -37,6 +38,7 @@ public class EventManager implements IEventManager {
 
     private <T extends Event> void singleEventDispatch(MethodEventExecutor<?> methodEventExecutor, T event) {
         try {
+            availableParams.put("plugin", methodEventExecutor.getPlugin());
             ParametersWirer<?> wirer = new ParametersWirer<>(
                 methodEventExecutor.getClassInstance().getClass());
             wirer.invoke(
@@ -59,7 +61,7 @@ public class EventManager implements IEventManager {
     }
 
     @Override
-    public void register(Object classInstance) {
+    public void register(Object classInstance, IPlugin plugin) {
         Class<?> eventSubscriberClass = classInstance.getClass();
         if (!(eventSubscriberClass.isAnnotationPresent(EventBus.class))) {
             throw new MissingAnnotationException("Cannot find the EventBus annotation on the target class !");
@@ -67,12 +69,12 @@ public class EventManager implements IEventManager {
         Arrays.stream(eventSubscriberClass.getMethods()).filter(a -> a.isAnnotationPresent(EventReceiver.class))
             .forEach(method -> {
                 EventReceiver receiver = method.getAnnotation(EventReceiver.class);
-                addEventMethod(receiver.value(), classInstance, method, receiver.priority());
+                addEventMethod(receiver.value(), plugin, classInstance, method, receiver.priority());
             });
     }
 
     private void addEventMethod(
-        Class<? extends Event> type, Object classInstance, Method method, EventPriority priority) {
-        events.add(new MethodEventExecutor<>(type, classInstance, method, priority));
+        Class<? extends Event> type, IPlugin plugin, Object classInstance, Method method, EventPriority priority) {
+        events.add(new MethodEventExecutor<>(type, plugin, classInstance, method, priority));
     }
 }

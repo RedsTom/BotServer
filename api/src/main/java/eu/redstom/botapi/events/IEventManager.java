@@ -1,5 +1,6 @@
 package eu.redstom.botapi.events;
 
+import eu.redstom.botapi.plugins.IPlugin;
 import org.javacord.api.event.Event;
 
 /**
@@ -19,7 +20,8 @@ public interface IEventManager {
      * Registers an event subscriber class
      *
      * @param eventSubscriberClass The class to register
+     * @param plugin               The plugin that registers the event
      */
-    void register(Object eventSubscriberClass);
+    void register(Object eventSubscriberClass, IPlugin plugin);
 
 }

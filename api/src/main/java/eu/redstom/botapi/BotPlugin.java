@@ -26,19 +26,16 @@ public @interface BotPlugin {
 
     /**
      * @return The version of the plugin
-     * @default 1.0
      */
     String version() default "1.0";
 
     /**
      * @return The description of the plugin
-     * @default ""
      */
     String description() default "";
 
     /**
      * @return If the plugin uses the inject methods
-     * @default true
      */
     boolean needsInject() default true;
 

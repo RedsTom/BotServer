@@ -1,8 +1,7 @@
 package eu.redstom.botapi.configuration;
 
-import com.google.gson.JsonObject;
-
 import java.io.IOException;
+import java.util.Map;
 
 public interface FileConfiguration {
 
@@ -10,6 +9,6 @@ public interface FileConfiguration {
 
     void save() throws IOException;
 
-    JsonObject getValues();
+    Map<?, ?> getValues();
 
 }

@@ -3,12 +3,15 @@ package eu.redstom.botserver.server;
 import eu.redstom.botapi.events.IEventManager;
 import eu.redstom.botapi.server.IServer;
 import eu.redstom.botserver.config.ConfigFile;
+import eu.redstom.botserver.config.PluginFolder;
 import eu.redstom.botserver.config.parsed.Config;
 import eu.redstom.botserver.console.CommandThread;
 import eu.redstom.botserver.events.EventManager;
 import eu.redstom.botserver.events.types.ServerStartedEventImpl;
 import eu.redstom.botserver.events.types.ServerStartingEventImpl;
+import eu.redstom.botserver.plugins.Plugin;
 import eu.redstom.botserver.plugins.loader.PluginLoader;
+import eu.redstom.botserver.plugins.loader.wirer.ParametersWirer;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -17,6 +20,7 @@ import org.javacord.api.DiscordApi;
 import org.javacord.api.DiscordApiBuilder;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
@@ -33,6 +37,7 @@ public class Server implements IServer {
     private PluginLoader pluginLoader;
     private boolean stopping;
     private Map<String, Object> availableParams;
+    private PluginFolder pluginFolder;
 
     public void start() {
 
@@ -166,6 +171,20 @@ public class Server implements IServer {
 
     public void stop() {
         this.stopping = true;
+        System.out.println("Server stopping...");
+        for (Plugin plugin : pluginLoader.getPlugins()) {
+            ParametersWirer<?> wirer = new ParametersWirer<>(plugin.getInstance().getClass());
+
+            this.availableParams.put("plugin", plugin);
+
+            try {
+                wirer.invoke(wirer.getMethod("unload"), plugin.getInstance(), new Object[0], availableParams);
+            } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+                e.printStackTrace();
+            }
+        }
+        System.out.println("Server stopped !");
+        System.exit(0);
     }
 
     private CompletableFuture<Void> resetVariables() {
@@ -179,6 +198,17 @@ public class Server implements IServer {
             completableFuture.complete(null);
         });
         return completableFuture;
+    }
+
+    public PluginFolder getPluginFolder() {
+        if (this.pluginFolder == null) {
+            PluginFolder folder = new PluginFolder();
+            if (folder.checkExist()) {
+                this.pluginFolder = folder;
+                return folder;
+            }
+        }
+        return this.pluginFolder;
     }
 
     private CompletableFuture<Config> getConfig() {
@@ -206,11 +236,7 @@ public class Server implements IServer {
         CompletableFuture<Void> completableFuture = new CompletableFuture<>();
 
         Executors.newCachedThreadPool().submit(() -> {
-            try {
-                pluginLoader.load(eventManager, availableParams);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            pluginLoader.load(this, eventManager, availableParams);
             eventManager.dispatch(new ServerStartingEventImpl(this.api));
             completableFuture.complete(null);
         });

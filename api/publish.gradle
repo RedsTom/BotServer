@@ -1,0 +1,62 @@
+group 'eu.redstom'
+def artifactPublishedId = 'botserver-api'
+def jarBaseName = 'api'
+version '0.0.1-SNAPSHOT'
+
+task sourceJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.allJava
+}
+
+task packageJavadoc(type: Jar) {
+    from javadoc
+    classifier = 'javadoc'
+}
+
+publishing {
+    repositories {
+        maven {
+            name 'snapshots'
+            url 'https://maven.ftmnet.com/snapshots/'
+            credentials {
+                username ftmnet_authUser
+                password ftmnet_authToken
+            }
+        }
+
+        maven {
+            name 'releases'
+            url 'https://maven.ftmnet.com/releases/'
+            credentials {
+                username ftmnet_authUser
+                password ftmnet_authToken
+            }
+        }
+    }
+
+    publications {
+        jar(MavenPublication) {
+            groupId group
+            artifactId artifactPublishedId
+            version version
+
+            artifact("${buildDir}/libs/${project.name}-${version}-all.jar")
+            artifact sourceJar
+            artifact packageJavadoc
+        }
+    }
+}
+
+task publishToSnapshots(type: GradleBuild) {
+    tasks = ['clean', 'shadowJar', 'publishAllPublicationsToSnapshotsRepository']
+
+    description "publish ${artifactPublishedId}-${version}"
+    group 'ftmnet publishing'
+}
+
+task publishToReleases(type: GradleBuild) {
+    tasks = ['clean', 'shadowJar', 'publishAllPublicationsToReleasesRepository']
+
+    description "publish ${artifactPublishedId}-${version}"
+    group 'ftmnet publishing'
+}
