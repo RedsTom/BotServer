@@ -1,7 +1,7 @@
 group 'eu.redstom'
 def artifactPublishedId = 'botserver-api'
 def jarBaseName = 'api'
-version '0.0.1-SNAPSHOT'
+version '0.0.4-SNAPSHOT'
 
 task sourceJar(type: Jar) {
     classifier = 'sources'
@@ -48,14 +48,14 @@ publishing {
 }
 
 task publishToSnapshots(type: GradleBuild) {
-    tasks = ['clean', 'shadowJar', 'publishAllPublicationsToSnapshotsRepository']
+    tasks = ['shadowJar', 'publishAllPublicationsToSnapshotsRepository']
 
     description "publish ${artifactPublishedId}-${version}"
     group 'ftmnet publishing'
 }
 
 task publishToReleases(type: GradleBuild) {
-    tasks = ['clean', 'shadowJar', 'publishAllPublicationsToReleasesRepository']
+    tasks = ['shadowJar', 'publishAllPublicationsToReleasesRepository']
 
     description "publish ${artifactPublishedId}-${version}"
     group 'ftmnet publishing'

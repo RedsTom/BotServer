@@ -13,9 +13,12 @@ import java.lang.annotation.*;
 public @interface EventReceiver {
 
     /**
-     * The type of event to register
+     * @return The type of event to register
      */
     Class<? extends Event> value();
 
+    /**
+     * @return The priority of the event
+     */
     EventPriority priority() default EventPriority.NORMAL;
 }
