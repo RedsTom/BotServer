@@ -23,11 +23,14 @@ repositories {
     maven {
         url "https://oss.sonatype.org/content/repositories/snapshots/"
     }
+    maven {
+        url 'https://jitpack.io/'
+    }
 }
 
 dependencies {
     implementation 'com.mojang:brigadier:1.0.17'
-    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation 'me.carleslc.Simple-YAML:Simple-Yaml:1.7.2'
     implementation 'org.jline:jline-console:3.18.0'
     implementation 'org.apache.logging.log4j:log4j-iostreams:2.14.0'
     implementation 'org.reflections:reflections:0.9.12'

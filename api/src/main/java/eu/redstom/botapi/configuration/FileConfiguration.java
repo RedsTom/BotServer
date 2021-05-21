@@ -1,7 +1,9 @@
 package eu.redstom.botapi.configuration;
 
+import org.simpleyaml.configuration.file.YamlConfiguration;
+import org.simpleyaml.exceptions.InvalidConfigurationException;
+
 import java.io.IOException;
-import java.util.Map;
 
 /**
  * Represents the configuration of the plugin
@@ -11,9 +13,10 @@ public interface FileConfiguration {
     /**
      * Updates the content of the values map from the file
      *
-     * @throws IOException If the file cannot be read
+     * @throws IOException                   If the file cannot be read
+     * @throws InvalidConfigurationException If the file cannot be parsed
      */
-    void update() throws IOException;
+    void update() throws IOException, InvalidConfigurationException;
 
     /**
      * Saves the content of the map into the file
@@ -25,6 +28,6 @@ public interface FileConfiguration {
     /**
      * @return The values of the file as an hashmap
      */
-    Map<String, Object> getValues();
+    YamlConfiguration getValues();
 
 }

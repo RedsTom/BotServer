@@ -31,6 +31,9 @@ public enum EventPriority {
         this.priority = priority;
     }
 
+    /**
+     * @return The priority as an integer for sorting the lists correctly.
+     */
     public int getPriority() {
         return priority;
     }

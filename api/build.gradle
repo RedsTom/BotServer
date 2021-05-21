@@ -8,6 +8,7 @@ apply from: 'publish.gradle'
 
 repositories {
     mavenCentral()
+
     maven {
         url 'https://jitpack.io/'
     }
@@ -22,8 +23,8 @@ dependencies {
     apiElements 'org.javacord:javacord:3.+'
     implementation 'org.javacord:javacord:3.+'
 
-    implementation 'com.google.code.gson:gson:2.8.6'
-    apiElements 'com.google.code.gson:gson:2.8.6'
+    implementation 'me.carleslc.Simple-YAML:Simple-Yaml:1.7.2'
+    apiElements 'me.carleslc.Simple-YAML:Simple-Yaml:1.7.2'
 
     implementation 'org.apache.logging.log4j:log4j-core:2.14.0'
     apiElements 'org.apache.logging.log4j:log4j-core:2.14.0'

@@ -3,5 +3,7 @@ build/
 
 plugins/example.jar
 plugins/*.jar
+plugins/*.yml
+plugins/*.json
 logs/
-config.json
+config.yml

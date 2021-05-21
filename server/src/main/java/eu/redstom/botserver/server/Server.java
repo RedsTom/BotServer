@@ -2,9 +2,8 @@ package eu.redstom.botserver.server;
 
 import eu.redstom.botapi.events.IEventManager;
 import eu.redstom.botapi.server.IServer;
-import eu.redstom.botserver.config.ConfigFile;
+import eu.redstom.botserver.config.FileConfiguration;
 import eu.redstom.botserver.config.PluginFolder;
-import eu.redstom.botserver.config.parsed.Config;
 import eu.redstom.botserver.console.CommandThread;
 import eu.redstom.botserver.events.EventManager;
 import eu.redstom.botserver.events.types.ServerStartedEventImpl;
@@ -18,6 +17,7 @@ import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.io.IoBuilder;
 import org.javacord.api.DiscordApi;
 import org.javacord.api.DiscordApiBuilder;
+import org.simpleyaml.exceptions.InvalidConfigurationException;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -33,7 +33,7 @@ public class Server implements IServer {
     private volatile boolean started;
     private DiscordApi api;
     private EventManager eventManager;
-    private Config config;
+    private FileConfiguration config;
     private PluginLoader pluginLoader;
     private boolean stopping;
     private Map<String, Object> availableParams;
@@ -47,7 +47,7 @@ public class Server implements IServer {
             System.setErr(IoBuilder.forLogger(getLogger()).setLevel(Level.ERROR).buildPrintStream());
 
             System.out.println("Server marked as starting");
-            System.out.println("");
+            System.out.println();
 
             new CommandThread(this, null);
 
@@ -211,20 +211,19 @@ public class Server implements IServer {
         return this.pluginFolder;
     }
 
-    private CompletableFuture<Config> getConfig() {
-        CompletableFuture<Config> completableFuture = new CompletableFuture<>();
+    private CompletableFuture<FileConfiguration> getConfig() {
+        CompletableFuture<FileConfiguration> completableFuture = new CompletableFuture<>();
         Executors.newCachedThreadPool().submit(() -> {
             System.out.println("Loading configuration...");
             try {
-                ConfigFile configFile = new ConfigFile();
-                if (!configFile.checkExist()) {
-                    Config config = Config.empty();
-                    config.setToken("");
-                    config.setPrefix("!");
-                    config.write(configFile);
+                FileConfiguration config = new FileConfiguration("config");
+                if (!(config.getValues().isSet("prefix") || config.getValues().isSet("token"))) {
+                    config.getValues().set("token", "");
+                    config.getValues().set("prefix", "!");
+                    config.save();
                 }
-                completableFuture.complete(configFile.parse());
-            } catch (IOException exception) {
+                completableFuture.complete(config);
+            } catch (IOException | InvalidConfigurationException exception) {
                 exception.printStackTrace();
                 completableFuture.complete(null);
             }
@@ -246,7 +245,7 @@ public class Server implements IServer {
     private CompletableFuture<Void> loginBot() {
         CompletableFuture<Void> completableFuture = new CompletableFuture<>();
         Executors.newCachedThreadPool().submit(() -> {
-            DiscordApiBuilder apiBuilder = new DiscordApiBuilder().setToken(config.getToken());
+            DiscordApiBuilder apiBuilder = new DiscordApiBuilder().setToken(config.getValues().getString("token"));
             apiBuilder.setAllIntents();
             this.api = apiBuilder.login().join();
             completableFuture.complete(null);
@@ -281,11 +280,7 @@ public class Server implements IServer {
 
     @Override
     public String getPrefix() {
-        return config.getPrefix();
-    }
-
-    public void setConfig(Config config) {
-        this.config = config;
+        return config.getValues().getString("prefix");
     }
 
     public PluginLoader getPluginLoader() {

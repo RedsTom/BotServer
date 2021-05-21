@@ -1,7 +1,7 @@
 group 'eu.redstom'
 def artifactPublishedId = 'botserver-api'
 def jarBaseName = 'api'
-version '0.0.4-SNAPSHOT'
+version '0.0.10-SNAPSHOT'
 
 task sourceJar(type: Jar) {
     classifier = 'sources'

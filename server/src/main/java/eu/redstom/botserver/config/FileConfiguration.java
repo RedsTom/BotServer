@@ -1,48 +1,61 @@
 package eu.redstom.botserver.config;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import eu.redstom.botserver.plugins.Plugin;
+import org.simpleyaml.configuration.file.YamlConfiguration;
+import org.simpleyaml.exceptions.InvalidConfigurationException;
 
-import java.io.*;
-import java.util.HashMap;
-import java.util.Map;
+import java.io.File;
+import java.io.IOException;
 
 public class FileConfiguration implements eu.redstom.botapi.configuration.FileConfiguration {
 
-    private final File folder;
-    private File file;
-    private Map<String, Object> values;
+    private final File file;
+    private YamlConfiguration config;
 
-    public FileConfiguration(Plugin plugin, String fileName) throws IOException {
-        this.folder = new File(new PluginFolder(), plugin.getId());
+    public FileConfiguration(Plugin plugin, String fileName) throws IOException, InvalidConfigurationException {
+        File folder = new File(new PluginFolder(), plugin.getId());
         if (!folder.exists()) folder.mkdirs();
-        this.file = new File(folder, fileName + ".json");
+        this.file = new File(folder, fileName + ".yml");
         if (!file.exists()) {
             file.createNewFile();
-            this.values = new HashMap<>();
+            this.config = new YamlConfiguration();
             save();
         }
         update();
     }
 
-    public void update() throws IOException {
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        BufferedReader reader = new BufferedReader(new FileReader(file));
-        this.values = gson.fromJson(reader, Map.class);
-        reader.close();
+    public FileConfiguration(File folder, String fileName) throws IOException, InvalidConfigurationException {
+        if (!folder.exists()) folder.mkdirs();
+        this.file = new File(folder, fileName + ".yml");
+        if (!file.exists()) {
+            file.createNewFile();
+            this.config = new YamlConfiguration();
+            save();
+        }
+        update();
+    }
+
+    public FileConfiguration(String config) throws IOException, InvalidConfigurationException {
+        this.file = new File(config + ".yml");
+        if (!file.exists()) {
+            file.createNewFile();
+            this.config = new YamlConfiguration();
+            save();
+        }
+        update();
+    }
+
+    public void update() throws IOException, InvalidConfigurationException {
+        config = new YamlConfiguration();
+        config.load(file);
     }
 
 
     public void save() throws IOException {
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        BufferedWriter writer = new BufferedWriter(new FileWriter(file));
-        writer.write(gson.toJson(values));
-        writer.flush();
-        writer.close();
+        config.save(file);
     }
 
-    public Map<String, Object> getValues() {
-        return values;
+    public YamlConfiguration getValues() {
+        return config;
     }
 }

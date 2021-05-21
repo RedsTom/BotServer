@@ -2,9 +2,12 @@ package eu.redstom.botserver.plugins;
 
 import eu.redstom.botapi.BotPlugin;
 import eu.redstom.botapi.configuration.FileConfiguration;
+import eu.redstom.botapi.i18n.I18n;
 import eu.redstom.botapi.plugins.IPlugin;
+import eu.redstom.botserver.plugins.i18n.I18nImpl;
 import eu.redstom.botserver.server.Server;
 import org.reflections.Reflections;
+import org.simpleyaml.exceptions.InvalidConfigurationException;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,6 +19,7 @@ public class Plugin implements IPlugin {
     private final Object instance;
     private final File pluginFolder;
     private FileConfiguration pluginConfig;
+    private final I18n i18n;
 
     public Plugin(Server server, Class<?> mainClass, Reflections pluginReflections)
         throws IllegalAccessException, InstantiationException {
@@ -28,6 +32,7 @@ public class Plugin implements IPlugin {
         this.instance = mainClass.newInstance();
         this.pluginReflections = pluginReflections;
         this.pluginFolder = new File(server.getPluginFolder(), id.toLowerCase());
+        this.i18n = new I18nImpl(this);
     }
 
     @Override
@@ -65,7 +70,7 @@ public class Plugin implements IPlugin {
         if (this.pluginConfig == null) {
             try {
                 this.pluginConfig = new eu.redstom.botserver.config.FileConfiguration(this, "config");
-            } catch (IOException e) {
+            } catch (IOException | InvalidConfigurationException e) {
                 e.printStackTrace();
             }
         }
@@ -75,6 +80,11 @@ public class Plugin implements IPlugin {
     @Override
     public File getPluginFolder() {
         return pluginFolder;
+    }
+
+    @Override
+    public I18n getTranslationManager() {
+        return i18n;
     }
 
     public Reflections getPluginReflections() {
