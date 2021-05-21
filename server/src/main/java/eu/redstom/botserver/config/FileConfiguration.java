@@ -13,7 +13,7 @@ public class FileConfiguration implements eu.redstom.botapi.configuration.FileCo
     private YamlConfiguration config;
 
     public FileConfiguration(Plugin plugin, String fileName) throws IOException, InvalidConfigurationException {
-        File folder = new File(new PluginFolder(), plugin.getId());
+        File folder = plugin.getPluginFolder();
         if (!folder.exists()) folder.mkdirs();
         this.file = new File(folder, fileName + ".yml");
         if (!file.exists()) {

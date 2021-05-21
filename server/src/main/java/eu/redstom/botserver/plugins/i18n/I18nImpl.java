@@ -47,7 +47,6 @@ public class I18nImpl implements I18n {
     @Override
     public String get(ILanguage language, ITranslationKey key) {
         if (!this.mapCache.containsKey(formatKeyForCache(language, key))) {
-            System.out.println("Pushing " + language.getLanguageKey() + ":" + key.getKey() + " to cache");
             this.mapCache.put(
                 formatKeyForCache(language, key),
                 this.configs.containsKey(language.getLanguageKey())
@@ -55,7 +54,6 @@ public class I18nImpl implements I18n {
                     : key.getDefault()
             );
         }
-        System.out.println("Loading from cache...");
         return this.mapCache.get(formatKeyForCache(language, key));
     }
 
