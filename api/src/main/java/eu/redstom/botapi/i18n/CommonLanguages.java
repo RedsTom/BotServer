@@ -16,11 +16,11 @@ public enum CommonLanguages implements ILanguage {
     /**
      * French
      */
-    FR_FR("fr", "Français"),
+    FR_FR("fr-fr", "Français"),
     /**
      * Spanish
      */
-    ES_ES("es", "Español");
+    ES_ES("es-es", "Español");
 
     private final String languageKey, languageName;
 

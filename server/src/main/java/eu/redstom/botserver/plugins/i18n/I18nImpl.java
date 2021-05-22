@@ -16,25 +16,13 @@ public class I18nImpl implements I18n {
 
     private final HashMap<String, FileConfiguration> configs;
     private final HashMap<String, String> mapCache;
+    private final File folder;
 
     public I18nImpl(Plugin source) {
-        File folder = new File(source.getPluginFolder(), "languages");
+        this.folder = new File(source.getPluginFolder(), "languages");
         this.configs = new HashMap<>();
         this.mapCache = new HashMap<>();
-        if (!folder.exists()) folder.mkdirs();
-
-        if (folder.listFiles() == null) return;
-
-        for (File file : folder.listFiles()) {
-            if (!file.getName().endsWith(".yml")) continue;
-
-            String language = file.getName().subSequence(0, file.getName().length() - 4).toString();
-            try {
-                this.configs.put(language, new FileConfiguration(folder, language));
-            } catch (IOException | InvalidConfigurationException e) {
-                e.printStackTrace();
-            }
-        }
+        updateFiles();
     }
 
     @Override
@@ -59,5 +47,22 @@ public class I18nImpl implements I18n {
 
     private String formatKeyForCache(ILanguage language, ITranslationKey key) {
         return language.getLanguageKey() + ":" + key.getKey();
+    }
+
+    public void updateFiles() {
+        if (!folder.exists()) folder.mkdirs();
+
+        if (folder.listFiles() == null) return;
+
+        for (File file : folder.listFiles()) {
+            if (!file.getName().endsWith(".yml")) continue;
+
+            String language = file.getName().subSequence(0, file.getName().length() - 4).toString();
+            try {
+                this.configs.put(language, new FileConfiguration(folder, language));
+            } catch (IOException | InvalidConfigurationException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

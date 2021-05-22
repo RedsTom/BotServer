@@ -5,6 +5,7 @@ import eu.redstom.botapi.events.SelfRegisteringListener;
 import eu.redstom.botserver.config.PluginFolder;
 import eu.redstom.botserver.events.EventManager;
 import eu.redstom.botserver.plugins.Plugin;
+import eu.redstom.botserver.plugins.i18n.I18nImpl;
 import eu.redstom.botserver.plugins.loader.exceptions.MissingAnnotationException;
 import eu.redstom.botserver.plugins.loader.exceptions.PluginAlreadyExistsException;
 import eu.redstom.botserver.plugins.loader.java.FileUtils;
@@ -133,6 +134,8 @@ public class PluginLoader {
                     FileUtils.copyJarResourcesRecursively(plugin.getPluginFolder(), con);
                 }
             }
+
+            ((I18nImpl) plugin.getTranslationManager()).updateFiles();
 
             ParametersWirer<?> pluginWirer = new ParametersWirer<>(plugin.getInstance().getClass());
 

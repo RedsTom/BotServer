@@ -23,5 +23,4 @@ public interface I18n {
      * @return The translated string
      */
     String get(ILanguage language, ITranslationKey key);
-
 }
