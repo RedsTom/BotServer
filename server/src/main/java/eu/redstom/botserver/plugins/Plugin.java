@@ -19,6 +19,7 @@ public class Plugin implements IPlugin {
     private final Object instance;
     private final File pluginFolder;
     private FileConfiguration pluginConfig;
+    private final boolean didPluginFolderExist;
     private final I18n i18n;
 
     public Plugin(Server server, Class<?> mainClass, Reflections pluginReflections)
@@ -32,6 +33,7 @@ public class Plugin implements IPlugin {
         this.instance = mainClass.newInstance();
         this.pluginReflections = pluginReflections;
         this.pluginFolder = new File(server.getPluginFolder(), id.toLowerCase());
+        this.didPluginFolderExist = pluginFolder.exists();
         this.i18n = new I18nImpl(this);
     }
 
@@ -89,6 +91,10 @@ public class Plugin implements IPlugin {
 
     public Reflections getPluginReflections() {
         return pluginReflections;
+    }
+
+    public boolean didFolderExist() {
+        return pluginFolder.exists() && didPluginFolderExist;
     }
 
     public void printInformation() {

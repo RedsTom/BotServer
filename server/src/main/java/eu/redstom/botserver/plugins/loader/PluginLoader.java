@@ -7,6 +7,7 @@ import eu.redstom.botserver.events.EventManager;
 import eu.redstom.botserver.plugins.Plugin;
 import eu.redstom.botserver.plugins.loader.exceptions.MissingAnnotationException;
 import eu.redstom.botserver.plugins.loader.exceptions.PluginAlreadyExistsException;
+import eu.redstom.botserver.plugins.loader.java.FileUtils;
 import eu.redstom.botserver.plugins.loader.java.JarFileLoader;
 import eu.redstom.botserver.plugins.loader.wirer.ParametersWirer;
 import eu.redstom.botserver.server.Server;
@@ -21,7 +22,9 @@ import org.reflections.util.FilterBuilder;
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.net.JarURLConnection;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -118,6 +121,20 @@ public class PluginLoader {
             // Initializes a new plugin with the informations of the @BotPlugin annotation.
             Plugin plugin = new Plugin(server, mainClass, reflections);
             plugin.printInformation();
+
+            if (!plugin.didFolderExist()) {
+                if (!plugin.getPluginFolder().exists()) {
+                    plugin.getPluginFolder().mkdir();
+                }
+                for (URL url : cl.getURLs()) {
+                    System.out.println(url);
+                    url = new URL("jar:" + url + "!/");
+                    URLConnection uCon = url.openConnection();
+                    if (!(uCon instanceof JarURLConnection con)) continue;
+                    System.out.println(con.getJarFileURL());
+                    FileUtils.copyJarResourcesRecursively(plugin.getPluginFolder(), con);
+                }
+            }
 
             ParametersWirer<?> pluginWirer = new ParametersWirer<>(plugin.getInstance().getClass());
 
