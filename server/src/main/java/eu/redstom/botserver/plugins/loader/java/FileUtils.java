@@ -18,12 +18,8 @@ public class FileUtils {
 
         while (e.hasMoreElements()) {
             final JarEntry entry = e.nextElement();
-            System.out.println(entry.getName());
             if (entry.getName().startsWith("config/")) {
-                System.out.println("passed");
                 final String filename = StringUtils.removeStart(entry.getName(), "config/");
-                System.out.println(filename);
-                System.out.println("---");
 
                 final File f = new File(destDir, filename);
                 if (!entry.isDirectory()) {

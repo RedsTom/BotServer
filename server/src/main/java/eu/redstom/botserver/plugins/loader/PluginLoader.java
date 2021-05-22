@@ -127,11 +127,9 @@ public class PluginLoader {
                     plugin.getPluginFolder().mkdir();
                 }
                 for (URL url : cl.getURLs()) {
-                    System.out.println(url);
                     url = new URL("jar:" + url + "!/");
                     URLConnection uCon = url.openConnection();
                     if (!(uCon instanceof JarURLConnection con)) continue;
-                    System.out.println(con.getJarFileURL());
                     FileUtils.copyJarResourcesRecursively(plugin.getPluginFolder(), con);
                 }
             }
